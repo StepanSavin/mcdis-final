@@ -1,27 +1,46 @@
 <template >
-  <div @click="selectActiveFile" class="main">
+  <div  @click="selectActiveFile" class="main">
     <div class="container">
-      <h1 @click="backToFolder" class="folder-title">
+      <h1 class="folder-title">
         {{ selectedFolder.name ? selectedFolder.name : "Root Folder" }}
       </h1>
-      <div class="file-container">
+      <div class="navigation-panel">
+        <button
+          @click="backToFolder"
+          class="navigation-panel__button"
+          id="backButton"
+        >
+          Назад
+        </button>
+        <input
+          v-model="searchValue"
+          placeholder="Поиск по папке"
+          class="navigation-panel__input"
+        />
+      </div>
+      <div class="file-container" >
         <folder-view
           @click="selectActiveFile"
           @open="selectFolder"
-          v-for="(folder, index) in selectedFolder.folders"
+          v-for="(folder, index) in filteredFolders"
           :key="folder"
           :index="index"
           :name="folder.name"
+          :amountFolders="folder.folders.length"
+          :amountFiles="folder.files.length"
         >
         </folder-view>
         <file-view
           @click="selectActiveFile"
-          v-for="file in selectedFolder.files"
+          v-for="file in filteredFiles"
           :key="file"
           :name="file.name"
+          :type="file.type"
+          :length="file.length"
         >
         </file-view>
       </div>
+      <h2 v-if="filteredFiles.length === 0 && filteredFolders.length === 0" class="nothing">Ничего не найдено</h2>
     </div>
   </div>
 </template>
@@ -44,26 +63,47 @@ export default {
 
       selectedFolder: data,
       previousFolder: [],
+
+      searchValue: "",
     };
+  },
+
+  computed: {
+    filteredFolders() {
+      return this.selectedFolder.folders.filter((item) => {
+        return item.name.toUpperCase().includes(this.searchValue.toUpperCase());
+      });
+    },
+    filteredFiles() {
+      return this.selectedFolder.files.filter((item) => {
+        return item.name.toUpperCase().includes(this.searchValue.toUpperCase());
+      });
+    },
   },
 
   methods: {
     selectFolder(index) {
       this.previousFolder.push(this.selectedFolder);
       this.selectedFolder = this.selectedFolder.folders[index];
+      this.defineButtonEnable();
+      this.searchValue = '';
     },
 
     backToFolder() {
       if (this.previousFolder.length === 0) return;
       this.selectedFolder = this.previousFolder[this.previousFolder.length - 1];
       this.previousFolder.pop();
+      this.defineButtonEnable();
+      this.searchValue = '';
     },
 
     selectActiveFile(event) {
+
       event.stopPropagation();
+      if (window.innerWidth <= 1024) return;
+
       this.resetActiveClasses();
-      console.log(event.currentTarget.classList.contains('main'));
-      if (event.currentTarget.classList.contains('main')) return;
+      if (event.currentTarget.classList.contains("main")) return;
       event.currentTarget.classList.add("active");
     },
 
@@ -77,6 +117,18 @@ export default {
         folder.classList.remove("active");
       }
     },
+
+    defineButtonEnable() {
+      if (this.previousFolder.length === 0) {
+        document.querySelector("#backButton").disabled = true;
+      } else {
+        document.querySelector("#backButton").disabled = false;
+      }
+    },
+  },
+
+  mounted() {
+    this.defineButtonEnable();
   },
 };
 </script>

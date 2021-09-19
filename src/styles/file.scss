@@ -3,6 +3,7 @@
     flex-basis: 25%;
     padding: 0px 0px;
     box-sizing: border-box;
+    position: relative;
   }
   
   .file:hover{
@@ -34,3 +35,62 @@
       width: 100px;
   }
   
+  .file__name{
+      padding-top: 10px;
+      cursor: default;
+  }
+  
+
+  .file__info{
+    content: '';
+    position: absolute;
+    min-width:60%;
+    min-height: 80px;
+    padding: 0px 20px;
+    z-index:2;
+    top: 40%;
+    left: -20%;
+    color: white;
+    background: rgba(70, 69, 69, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    font-size: 15px;
+}
+
+div.active > .file__info{
+    display: flex;
+}
+
+
+  @media (max-width: 1024px){
+    .file{
+        flex-basis: 100%;
+        height: 70px;
+        border-bottom: 2px solid rgb(253, 209, 77);
+        padding-left: 20px;
+    }
+
+
+
+    .file__content{
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .file__image{
+        width:80px;
+    }
+
+    .file__image img{
+        width:50px;
+        padding-left: 20px;
+    }
+
+    .file__name{
+        font-size: 20px;
+        padding-left: 20px;
+    }
+}

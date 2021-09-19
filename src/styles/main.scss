@@ -1,9 +1,17 @@
 @import url("./file.scss");
 @import url("./folder.scss");
+@import url("./fonts.scss");
+@import url("./navigation-panel.scss");
 
 * {
   padding: 0;
   margin: 0;
+  font-family: "Roboto Regular";
+}
+
+.main {
+  min-height: 100vh;
+  background: rgb(255, 245, 214);
 }
 
 .container {
@@ -17,24 +25,33 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  margin-top: 20px;
 }
 
-@media screen and (max-width: 768px) {
-  .container {
+.folder-title{
+  padding-top: 20px;
+}
+
+.nothing{
+  margin-top: 50px;
+  text-align: center;
+}
+
+@media (max-width:1024px) {
+  .container{
     max-width: 100%;
-    font-size: 12px;
-
-    & .folder,
-    .file {
-      padding: 0;
-      font-size: 12px;
-    }
+  }
+  .file-container{
+    margin-top: 30px;
+  }
+  .folder-title{
+    padding-left: 30px;
   }
 }
 
-@media (min-width: 768px) {
-  * {
-    touch-action: none;
+@media (max-width: 768px){
+  
+  .folder-title{
+    padding-left: 30px;
   }
 }
+
