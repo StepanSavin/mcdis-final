@@ -46,11 +46,11 @@ div.active, div.active:hover{
 .folder__info{
     content: '';
     position: absolute;
-    width:60%;
+    width:100%;
     min-height: 80px;
     z-index:2;
-    top: 40%;
-    left: -20%;
+    top: 100%;
+    left: 0;
     color: white;
     background: rgba(70, 69, 69, 0.5);
     display: flex;
