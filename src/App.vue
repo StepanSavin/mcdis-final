@@ -1,5 +1,5 @@
 <template >
-  <div  @click="selectActiveFile" class="main">
+  <div @click="selectActiveFile" class="main">
     <div class="container">
       <h1 class="folder-title">
         {{ selectedFolder.name ? selectedFolder.name : "Root Folder" }}
@@ -12,13 +12,16 @@
         >
           Назад
         </button>
-        <input
-          v-model="searchValue"
-          placeholder="Поиск по папке"
-          class="navigation-panel__input"
-        />
+        <div class="navigation-panel__search">
+          <input
+            v-model="searchValue"
+            placeholder="Поиск по папке"
+            class="navigation-panel__input"
+          />
+          <img class="navigation-panel__icon" src="../public/svg/search-icon.svg" />
+        </div>
       </div>
-      <div class="file-container" >
+      <div class="file-container">
         <folder-view
           @click="selectActiveFile"
           @open="selectFolder"
@@ -40,7 +43,12 @@
         >
         </file-view>
       </div>
-      <h2 v-if="filteredFiles.length === 0 && filteredFolders.length === 0" class="nothing">Ничего не найдено</h2>
+      <h2
+        v-if="filteredFiles.length === 0 && filteredFolders.length === 0"
+        class="nothing"
+      >
+        Ничего не найдено
+      </h2>
     </div>
   </div>
 </template>
@@ -86,7 +94,7 @@ export default {
       this.previousFolder.push(this.selectedFolder);
       this.selectedFolder = this.selectedFolder.folders[index];
       this.defineButtonEnable();
-      this.searchValue = '';
+      this.searchValue = "";
     },
 
     backToFolder() {
@@ -94,11 +102,10 @@ export default {
       this.selectedFolder = this.previousFolder[this.previousFolder.length - 1];
       this.previousFolder.pop();
       this.defineButtonEnable();
-      this.searchValue = '';
+      this.searchValue = "";
     },
 
     selectActiveFile(event) {
-
       event.stopPropagation();
       if (window.innerWidth <= 1024) return;
 
