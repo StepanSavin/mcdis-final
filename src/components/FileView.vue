@@ -1,5 +1,5 @@
 <template>
-  <p class="file">{{name}}</p>
+  <p class="file">{{name}}File</p>
 </template>
 
 <script>
@@ -11,8 +11,3 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.file{
-  color: green;
-}
-</style>
