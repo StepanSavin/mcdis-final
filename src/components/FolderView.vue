@@ -1,6 +1,18 @@
 <template>
-  <div class="folder">
-    {{ name }}
+  <div
+    @pointerup="selectFolder"
+    @dblclick="selectFolder"
+    @mousedown.prevent
+    class="folder"
+  >
+    <div class="folder__content">
+      <div class="folder__image">
+        <img src="../svg/299060_folder_icon.svg" />
+      </div>
+      <p class="folder__name">
+        {{ name }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -9,14 +21,15 @@ export default {
   name: "FolderView",
   props: {
     name: String,
-    folders: Array,
+    index: Number,
   },
 
   methods: {
-    selectFolder() {
-      this.$emit("open");
-      console.log("select");
+    selectFolder(event) {
+      if (event.type === "pointerup" && screen.width > 1024) return;
+      this.$emit("open", this.index);
     },
+
   },
 };
 </script>

@@ -1,10 +1,36 @@
 .file {
-    color: green;
-    height: 100px;
+    height: 200px;
     flex-basis: 25%;
-    background: #eee;
-    padding: 0px 10px;
+    padding: 0px 0px;
     box-sizing: border-box;
-    word-break: break-all;
+  }
+  
+  .file:hover{
+      background-color: rgb(230, 230, 230, 0.4);
+      box-shadow: 1px 1px 1px rgb(202, 202, 202), -1px -1px rgb(204, 204, 204);
+  }
+  
+  div.active, div.active:hover{
+      background-color: rgb(204, 204, 204);
+  }
+  
+  .file__content{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      align-items: center;
+  }
+  
+  .file__image{
+      width:80%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .file__image img {
+      width: 100px;
   }
   
