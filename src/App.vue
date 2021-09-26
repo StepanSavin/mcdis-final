@@ -18,7 +18,10 @@
             placeholder="Поиск по папке"
             class="navigation-panel__input"
           />
-          <img class="navigation-panel__icon" src="../public/svg/search-icon.svg" />
+          <img
+            class="navigation-panel__icon"
+            src="../public/svg/search-icon.svg"
+          />
         </div>
       </div>
       <div class="file-container">
@@ -49,6 +52,9 @@
       >
         Ничего не найдено
       </h2>
+      <div v-if="isActiveFileSelected" class="note">
+        Чтобы открыть кликните два раза
+      </div>
     </div>
   </div>
 </template>
@@ -73,6 +79,8 @@ export default {
       previousFolder: [],
 
       searchValue: "",
+
+      isActiveFileSelected: false,
     };
   },
 
@@ -95,6 +103,7 @@ export default {
       this.selectedFolder = this.selectedFolder.folders[index];
       this.defineButtonEnable();
       this.searchValue = "";
+      this.isActiveFileSelected = false;
     },
 
     backToFolder() {
@@ -110,8 +119,16 @@ export default {
       if (window.innerWidth <= 1024) return;
 
       this.resetActiveClasses();
-      if (event.currentTarget.classList.contains("main")) return;
+      if (event.currentTarget.classList.contains("main")) {
+        this.isActiveFileSelected = false;
+        return;
+      }
       event.currentTarget.classList.add("active");
+      if (event.currentTarget.classList.contains("folder")) {
+        this.isActiveFileSelected = true;
+      } else {
+        this.isActiveFileSelected = false;
+      }
     },
 
     resetActiveClasses() {
