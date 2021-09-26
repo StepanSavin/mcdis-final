@@ -9,8 +9,8 @@
       </p>
     </div>
     <div class="folder__info">
-      <span>Файлов: {{ amountFiles }}</span>
-      <span> Папок: {{ amountFolders }}</span>
+      <span v-if="amountFiles>0">Файлов: {{ amountFiles }}</span>
+      <span v-if="amountFolders>0"> Папок: {{ amountFolders }}</span>
     </div>
   </div>
 </template>
