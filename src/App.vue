@@ -2,7 +2,7 @@
   <div @click="selectActiveFile" class="main">
     <div class="container">
       <h1 class="folder-title">
-        {{ selectedFolder.name ? selectedFolder.name : "Root Folder" }}
+        {{ selectedFolder.name ? selectedFolder.name : "root" }}
       </h1>
       <div class="navigation-panel">
         <button
